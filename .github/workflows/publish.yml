@@ -1,0 +1,29 @@
+name: Publish to NuGet
+
+# nuget.org Trusted Publishing: no stored API key. NuGet/login exchanges this run's GitHub OIDC token
+# for a short-lived key; the nuget.org policy allows only this repository and this workflow file.
+on:
+  workflow_dispatch:
+  release:
+    types: [published]
+
+permissions:
+  contents: read
+  id-token: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8.0.x
+      - run: dotnet test --configuration Release
+      - run: dotnet pack src/VerifyBlind.Server/VerifyBlind.Server.csproj --configuration Release --output artifacts
+      - uses: NuGet/login@v1
+        id: login
+        with:
+          user: VerifyBlind
+      # Pushing the .nupkg also pushes the .snupkg next to it.
+      - run: dotnet nuget push "artifacts/*.nupkg" --api-key "${{ steps.login.outputs.NUGET_API_KEY }}" --source https://api.nuget.org/v3/index.json --skip-duplicate
