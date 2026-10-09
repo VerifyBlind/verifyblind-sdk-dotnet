@@ -1,0 +1,38 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <RootNamespace>VerifyBlind.Server</RootNamespace>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <IsAotCompatible>true</IsAotCompatible>
+
+    <PackageId>VerifyBlind.Server</PackageId>
+    <Version>1.0.0</Version>
+    <Authors>VerifyBlind</Authors>
+    <Company>VerifyBlind</Company>
+    <Description>Server-side verification of VerifyBlind result tokens, webhooks and callbacks for .NET: RSA-PSS signature check, single-use nonce, asked-condition check, demo-card rejection and pattern B decryption.</Description>
+    <PackageTags>verifyblind;identity;age-verification;zero-knowledge;rsa-pss;turkey;aspnetcore</PackageTags>
+    <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
+    <PackageProjectUrl>https://verifyblind.com/en/developers</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/VerifyBlind/verifyblind-sdk-dotnet</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageIcon>icon.png</PackageIcon>
+    <Copyright>Copyright (c) VerifyBlind</Copyright>
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <EmbedUntrackedSources>true</EmbedUntrackedSources>
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="8.0.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="../../README.md" Pack="true" PackagePath="/" />
+    <None Include="../../icon.png" Pack="true" PackagePath="/" />
+    <InternalsVisibleTo Include="VerifyBlind.Server.Tests" />
+  </ItemGroup>
+
+</Project>
